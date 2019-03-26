@@ -6,12 +6,20 @@ public class ContaBancaria {
     private double saldo;
     
     public void sacar(double quantidade){
-        quantidade = quantidade - this.getSaldo();
+        quantidade = this.getSaldo() - quantidade;
         if( quantidade < this.getSaldo() ){
             setSaldo(quantidade);
         }
     }
-
+    
+    public void depositar(double quantidade){
+        if(quantidade > 0){
+            quantidade = this.getSaldo() + quantidade;
+            setSaldo(quantidade);
+        }
+        
+    }
+    
     public String getCliente() {
         return this.cliente;
     }
