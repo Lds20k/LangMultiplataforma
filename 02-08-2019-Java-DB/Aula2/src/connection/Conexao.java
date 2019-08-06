@@ -1,4 +1,4 @@
-package aula1.connection;
+package connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,7 @@ public class Conexao {
             Class.forName(driver);
             return DriverManager.getConnection(url, user, pass);
         }catch(SQLException ex){
-            throw new RuntimeException("Erro na coneão ", ex);
+            throw new RuntimeException("Erro na conexão ", ex);
         }
     }
 }

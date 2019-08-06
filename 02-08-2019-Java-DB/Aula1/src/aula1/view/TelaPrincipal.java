@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * @author aluno
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-    private final ControleAluno ctrAL;
+    private ControleAluno ctrAL;
     /**
      * Creates new form TelaPrincipal
      */
@@ -129,7 +129,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         try {
-            ctrAL.inserirAluno(Integer.getInteger( this.txtRA.getText() ), this.txtNome.getText());
+            ctrAL.inserirAluno(Integer.parseInt(this.txtRA.getText()), this.txtNome.getText());
         } catch (SQLException e) {
             e.printStackTrace();
         }
