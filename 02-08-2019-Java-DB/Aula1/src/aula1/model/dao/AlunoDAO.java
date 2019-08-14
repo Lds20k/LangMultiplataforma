@@ -7,10 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AlunoDAO {
     Connection con = null;
-    public ArrayList<Aluno> getAlunos() throws SQLException, ClassNotFoundException{
+    
+    public ArrayList<Aluno> getAlunos() throws SQLException{
         ArrayList<Aluno> alunos = new ArrayList<>();
         ResultSet resultado = null;
         try {
@@ -18,7 +21,7 @@ public class AlunoDAO {
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM Alunos");
             resultado = stmt.executeQuery();
             while(resultado.next()){
-                Aluno aluno = new Aluno(resultado.getInt("RA"), resultado.getString("NOME"));
+                Aluno aluno = new Aluno(resultado.getInt("RA"), resultado.getString("Nome"), resultado.getString("Linguagem"), resultado.getInt("Status"));
                 alunos.add(aluno);
             }
             stmt.close();
@@ -30,14 +33,33 @@ public class AlunoDAO {
         }
     }
     
+    public void deletar(int RA) throws SQLException{
+        try {
+            con = new Conexao().getConnection();
+            PreparedStatement stmt = con.prepareStatement("DELETE FROM Alunos WHERE RA = ?");
+            stmt.setInt(1, RA);
+            stmt.executeUpdate();
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AlunoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AlunoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            
+        }
+    }
+    
     public boolean inserir(Aluno aluno) throws SQLException{
         boolean inseriu = false;
         try{
             con        = new Conexao().getConnection();
-            String sql = "INSERT INTO Alunos (RA, NOME) values (?,?)";
+            String sql = "INSERT INTO Alunos (RA, Nome, Linguagem, Status) values (?, ?, ?, ?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, aluno.getRA());
             stmt.setString(2, aluno.getNome());
+            stmt.setString(3, aluno.getLinguagem());
+            stmt.setInt(4, aluno.getStatus());
             stmt.execute();
             stmt.close();
             inseriu = true;
