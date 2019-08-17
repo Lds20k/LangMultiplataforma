@@ -18,7 +18,9 @@ public class AlunoDAO {
         ResultSet resultado = null;
         try {
             con = new Conexao().getConnection();
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Alunos");
+            String SQL = "SELECT * FROM Alunos ORDER BY Nome";
+            
+            PreparedStatement stmt = con.prepareStatement(SQL);
             resultado = stmt.executeQuery();
             while(resultado.next()){
                 Aluno aluno = new Aluno(resultado.getInt("RA"), resultado.getString("Nome"), resultado.getString("Linguagem"), resultado.getInt("Status"));

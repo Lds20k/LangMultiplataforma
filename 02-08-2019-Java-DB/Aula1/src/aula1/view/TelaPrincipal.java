@@ -27,7 +27,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
         ctrAL = new ControleAluno();
-        this.atualizarTabela();
+        this.atualizarTabela(chkAprovados.isSelected(), chkRecuperacao.isSelected(), chkReprovados.isSelected());
     }
 
     /**
@@ -53,6 +53,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtLinguagem = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         cbStatus = new javax.swing.JComboBox<>();
+        chkAprovados = new javax.swing.JCheckBox();
+        chkRecuperacao = new javax.swing.JCheckBox();
+        chkReprovados = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblAlunos = new javax.swing.JTable();
 
@@ -125,6 +128,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        chkAprovados.setText("Aprovados");
+
+        chkRecuperacao.setText("Recuperação");
+        chkRecuperacao.setToolTipText("");
+        chkRecuperacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkRecuperacaoActionPerformed(evt);
+            }
+        });
+
+        chkReprovados.setText("Reprovados");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -132,28 +147,36 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(31, 31, 31)
-                        .addComponent(cbStatus, 0, 113, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtLinguagem))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNome)
-                            .addComponent(jLabel2))
-                        .addGap(34, 34, 34)
+                            .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNome)
-                            .addComponent(txtRA))))
-                .addGap(103, 103, 103)
+                            .addComponent(txtRA)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(txtLinguagem))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(cbStatus, 0, 105, Short.MAX_VALUE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chkAprovados)
+                    .addComponent(chkRecuperacao)
+                    .addComponent(chkReprovados))
+                .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,17 +185,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistrar))
+                    .addComponent(btnRegistrar)
+                    .addComponent(chkAprovados))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtRA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAtualizar))
+                    .addComponent(btnAtualizar)
+                    .addComponent(chkRecuperacao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtLinguagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDeletar))
+                    .addComponent(btnDeletar)
+                    .addComponent(chkReprovados))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,15 +243,51 @@ public class TelaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+    private void cbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStatusActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeActionPerformed
+    }//GEN-LAST:event_cbStatusActionPerformed
+
+    private void txtLinguagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLinguagemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLinguagemActionPerformed
+
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        int RA = (int) tblAlunos.getValueAt(tblAlunos.getSelectedRow(), 0);
+        try {
+            ctrAL.deletarAluna(RA);
+            atualizarTabela(chkAprovados.isSelected(), chkRecuperacao.isSelected(), chkReprovados.isSelected());
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnDeletarActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        this.atualizarTabela(chkAprovados.isSelected(), chkRecuperacao.isSelected(), chkReprovados.isSelected());
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        try {
+            ctrAL.inserirAluno(Integer.parseInt(this.txtRA.getText()), this.txtNome.getText(), this.txtLinguagem.getText(), this.cbStatus.getSelectedIndex());
+            this.atualizarTabela(chkAprovados.isSelected(), chkRecuperacao.isSelected(), chkReprovados.isSelected());
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtRAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRAActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRAActionPerformed
 
-    public void atualizarTabela(){
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeActionPerformed
+
+    private void chkRecuperacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkRecuperacaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkRecuperacaoActionPerformed
+
+    public void atualizarTabela(boolean aprovados, boolean recuperacao, boolean reprovados){
+        System.out.println(Boolean.toString(aprovados) + ' ' + Boolean.toString(recuperacao) + ' ' + Boolean.toString(reprovados));
         try{
             DefaultTableModel model = (DefaultTableModel) tblAlunos.getModel();
             model.setNumRows(0);
@@ -248,44 +310,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         status = "ERRO";
                         break;
                 }
-                model.addRow(new Object[]{al.getRA(), al.getNome(), al.getNome(), status});
+                if(!aprovados && !recuperacao && !reprovados){
+                    System.out.println("Entro 1");
+                    model.addRow(new Object[]{al.getRA(), al.getNome(), al.getLinguagem(), status});
+                }
+                else if(aprovados && al.getStatus() == 0){
+                    System.out.println("Entro 2");
+                    model.addRow(new Object[]{al.getRA(), al.getNome(), al.getLinguagem(), status});                    
+                }
+                else if(recuperacao && al.getStatus() == 1){
+                    System.out.println("Entro 3");
+                    model.addRow(new Object[]{al.getRA(), al.getNome(), al.getLinguagem(), status});
+                }
+                else if(reprovados && al.getStatus() == 2){
+                    System.out.println("Entro 4");
+                    model.addRow(new Object[]{al.getRA(), al.getNome(), al.getLinguagem(), status});
+                }
+                
             }
         }catch(SQLException ex){
             Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }       
     }
     
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        try {
-            ctrAL.inserirAluno(Integer.parseInt(this.txtRA.getText()), this.txtNome.getText(), this.txtLinguagem.getText(), this.cbStatus.getSelectedIndex());
-            this.atualizarTabela();
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnRegistrarActionPerformed
-
-    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        atualizarTabela();
-    }//GEN-LAST:event_btnAtualizarActionPerformed
-
-    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
-        int RA = (int) tblAlunos.getValueAt(tblAlunos.getSelectedRow(), 0);
-        try {
-            ctrAL.deletarAluna(RA);
-            atualizarTabela();
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnDeletarActionPerformed
-
-    private void txtLinguagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLinguagemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLinguagemActionPerformed
-
-    private void cbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStatusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbStatusActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -324,6 +371,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cbStatus;
+    private javax.swing.JCheckBox chkAprovados;
+    private javax.swing.JCheckBox chkRecuperacao;
+    private javax.swing.JCheckBox chkReprovados;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
