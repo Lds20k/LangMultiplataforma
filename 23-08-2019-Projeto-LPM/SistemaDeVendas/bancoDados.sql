@@ -20,7 +20,7 @@ CREATE TABLE Cliente(
 CREATE TABLE Produto(
 	COD_Produto INT NOT NULL AUTO_INCREMENT,
 	Unidade		VARCHAR(10),
-	Unidade_Tp	CHAR(2),
+	Unidade_Tp  CHAR(2),
 	Preco		FLOAT,
 	Descricao	TINYTEXT,
 	PRIMARY KEY (COD_Produto)
@@ -30,15 +30,17 @@ CREATE TABLE Produto(
 CREATE TABLE   Venda(
 	COD_Venda  INT NOT NULL AUTO_INCREMENT, 
 	ID_Cliente INT NOT NULL,
-	PRIMARY KEY (ID_Cliente)
+	PRIMARY KEY (COD_Venda),
+	FOREIGN KEY (ID_Cliente)   REFERENCES Cliente(ID_Cliente)
 );
 
 //ITENS_VENDA
-CREATE TABLE Iten_Venda(
-	ID_Item_Venda INT NOT NULL AUTO_INCREMENT,
-	COD_Venda     INT NOT NULL,
-	COD_Produto   INT NOT NULL,
+CREATE TABLE Item_Venda(
+	ID_Item_Venda INT   NOT NULL AUTO_INCREMENT,
+	COD_Venda     INT   NOT NULL,
+	COD_Produto   INT   NOT NULL,
+	Preco		  FLOAT NOT NULL,
 	PRIMARY KEY (ID_Item_Venda),
-	CONSTRAINT FK_COD_Venda   FOREIGN KEY (COD_Venda)   REFERENCES Venda(COD_Venda),
-	CONSTRAINT FK_COD_Produto FOREIGN KEY (COD_Produto) REFERENCES Produto(COD_Produto)
+	FOREIGN KEY (COD_Venda)   REFERENCES Venda(COD_Venda),
+	FOREIGN KEY (COD_Produto) REFERENCES Produto(COD_Produto)
 );
