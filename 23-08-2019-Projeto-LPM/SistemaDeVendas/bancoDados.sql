@@ -2,18 +2,19 @@
 
 //CLIENTE
 CREATE TABLE Cliente(
-	ID_Cliente    INT NOT NULL AUTO_INCREMENT,
-	CPF			  CHAR(11),
+	ID_Cliente    INT 		  NOT NULL AUTO_INCREMENT,
+	CPF			  CHAR(11)    NOT NULL,
 	Telefone_Resi CHAR(08),
 	Telefone_Celu CHAR(11),
-	Nome		  VARCHAR(45),
-	Email		  VARCHAR(45),
-	Numero		  VARCHAR(04),
-	Rua			  VARCHAR(45),
-	Bairro		  VARCHAR(45),
-	Cidade		  VARCHAR(45),
-	Estado		  VARCHAR(45),
-	PRIMARY KEY (ID_Cliente)
+	Nome		  VARCHAR(45) NOT NULL,
+	Email		  VARCHAR(45) NOT NULL,
+	Numero		  VARCHAR(04) NOT NULL,
+	Rua			  VARCHAR(45) NOT NULL,
+	Bairro		  VARCHAR(45) NOT NULL,
+	Cidade		  VARCHAR(45) NOT NULL,
+	Estado		  VARCHAR(45) NOT NULL,
+	PRIMARY KEY (ID_Cliente),
+	UNIQUE (CPF)
 );
 
 //PRODUTOS
