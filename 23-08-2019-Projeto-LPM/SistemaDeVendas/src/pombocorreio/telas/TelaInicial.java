@@ -11,7 +11,8 @@ package pombocorreio.telas;
  * @author aluno
  */
 public class TelaInicial extends javax.swing.JFrame {
-    private TelaCadastroCliente telaCli = null;
+    private TelaCadastroCliente  telaCli = null;
+    private TelaCadastrarProduto telaPro = null;
     /**
      * Creates new form telaInicial
      */
@@ -50,6 +51,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel1.setText("Pombo Correio");
 
         btnCadastrarProduto.setText("Cadastrar Produto");
+        btnCadastrarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarProdutoActionPerformed(evt);
+            }
+        });
 
         btnEfetuarVenda.setText("Efetuar Venda");
 
@@ -108,6 +114,15 @@ public class TelaInicial extends javax.swing.JFrame {
             telaCli.setVisible(true);
         }
     }//GEN-LAST:event_btnCadastrarClienteActionPerformed
+
+    private void btnCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProdutoActionPerformed
+        if(telaPro == null){
+            telaPro = new TelaCadastrarProduto();
+            telaPro.setVisible(true);
+        }else{
+            telaPro.setVisible(true);
+        }
+    }//GEN-LAST:event_btnCadastrarProdutoActionPerformed
 
     /**
      * @param args the command line arguments

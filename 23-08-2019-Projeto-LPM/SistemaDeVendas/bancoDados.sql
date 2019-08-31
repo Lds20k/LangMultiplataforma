@@ -19,18 +19,20 @@ CREATE TABLE Cliente(
 
 //PRODUTOS
 CREATE TABLE Produto(
-	COD_Produto INT NOT NULL AUTO_INCREMENT,
-	Unidade		VARCHAR(10),
-	Unidade_Tp  CHAR(2),
-	Preco		FLOAT,
-	Descricao	TINYTEXT,
+	COD_Produto INT 		NOT NULL AUTO_INCREMENT,
+	Unidade		VARCHAR(10) NOT NULL,
+	Unidade_Tp  VARCHAR(02) NOT NULL,
+	Preco		FLOAT		NOT NULL,
+	Descricao	TINYTEXT	NOT NULL,
 	PRIMARY KEY (COD_Produto)
 );
 
 //VENDA
 CREATE TABLE   Venda(
-	COD_Venda  INT NOT NULL AUTO_INCREMENT, 
-	ID_Cliente INT NOT NULL,
+	COD_Venda  INT   NOT NULL AUTO_INCREMENT, 
+	ID_Cliente INT   NOT NULL,
+	Data	   DATE  NOT NULL,
+	Preco	   FLOAT NOT NULL,
 	PRIMARY KEY (COD_Venda),
 	FOREIGN KEY (ID_Cliente)   REFERENCES Cliente(ID_Cliente)
 );
@@ -40,7 +42,6 @@ CREATE TABLE Item_Venda(
 	ID_Item_Venda INT   NOT NULL AUTO_INCREMENT,
 	COD_Venda     INT   NOT NULL,
 	COD_Produto   INT   NOT NULL,
-	Preco		  FLOAT NOT NULL,
 	PRIMARY KEY (ID_Item_Venda),
 	FOREIGN KEY (COD_Venda)   REFERENCES Venda(COD_Venda),
 	FOREIGN KEY (COD_Produto) REFERENCES Produto(COD_Produto)
