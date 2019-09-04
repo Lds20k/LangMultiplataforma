@@ -23,8 +23,7 @@ public class Cliente {
     private String cidade;
     private String estado;
 
-    public Cliente(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Cliente() {
     }
     
     public int getID() {

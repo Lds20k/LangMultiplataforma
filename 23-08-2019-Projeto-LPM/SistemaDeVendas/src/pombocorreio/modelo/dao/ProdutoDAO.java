@@ -7,7 +7,11 @@ package pombocorreio.modelo.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pombocorreio.conexao.Conexao;
 import pombocorreio.modelo.Produto;
 
@@ -29,14 +33,68 @@ public class ProdutoDAO {
             stmt.setString(2, prod.getUnidadeTipo());
             stmt.setFloat(3, prod.getPreco());
             stmt.setString(4, prod.getDescricao());
-            inseriu=true;
+            stmt.execute();
+            inseriu = true;
         }
-        catch(Exception ex){
-            ex.printStackTrace();
+        catch(ClassNotFoundException | SQLException ex){
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             con.close();
         }
         return inseriu; 
+    }
+    
+    public ArrayList<Produto> consultar() throws SQLException{
+        ArrayList<Produto> produtos = new ArrayList<>();
+        try {
+            con = new Conexao().getConnection();
+            String sql = "SELECT * FROM Produto";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.execute();
+            ResultSet resultado = stmt.getResultSet();
+            while(resultado.next()){
+                Produto produto = new Produto();
+                produto.setCodigo(resultado.getInt("COD_Produto"));
+                produto.setUnidade(resultado.getString("Unidade"));
+                produto.setUnidadeTipo(resultado.getString("Unidade_Tp"));
+                produto.setPreco(resultado.getFloat("Preco"));
+                produto.setDescricao(resultado.getString("Descricao"));
+                produtos.add(produto);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return produtos;
+    }
+    
+    public boolean excluir(Produto produto) throws SQLException{
+        boolean excluiu = false;
+        try{
+            con = new Conexao().getConnection();
+            String sql = "DELETE FROM Produto WHERE COD_Produto = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, produto.getCodigo());
+            stmt.execute();
+        }
+        catch(ClassNotFoundException | SQLException ex){
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return excluiu;
+    }
+
+    public boolean alterar(Produto produto) throws SQLException{
+        boolean alterou = false;
+        try{
+            con = new Conexao().getConnection();
+            String sql = "UPDATE Produto WHERE COD_Produto = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, produto.getCodigo());
+            stmt.execute();
+        }
+        catch(ClassNotFoundException | SQLException ex){
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return alterou;
     }
 }
