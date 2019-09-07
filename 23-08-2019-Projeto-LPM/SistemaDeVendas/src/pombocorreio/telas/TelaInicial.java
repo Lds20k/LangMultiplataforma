@@ -12,7 +12,8 @@ package pombocorreio.telas;
  */
 public class TelaInicial extends javax.swing.JFrame {
     private TelaCadastroCliente  telaCli = null;
-    private TelaCadastrarProduto telaPro = null;
+    private TelaProduto telaPro = null;
+    private TelaVenda telaVen = null;
     /**
      * Creates new form telaInicial
      */
@@ -58,6 +59,11 @@ public class TelaInicial extends javax.swing.JFrame {
         });
 
         btnEfetuarVenda.setText("Efetuar Venda");
+        btnEfetuarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEfetuarVendaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -117,12 +123,21 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void btnCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProdutoActionPerformed
         if(telaPro == null){
-            telaPro = new TelaCadastrarProduto();
+            telaPro = new TelaProduto();
             telaPro.setVisible(true);
         }else{
             telaPro.setVisible(true);
         }
     }//GEN-LAST:event_btnCadastrarProdutoActionPerformed
+
+    private void btnEfetuarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEfetuarVendaActionPerformed
+        if(telaVen == null){
+            telaVen = new TelaVenda();
+            telaVen.setVisible(true);
+        }else{
+            telaVen.setVisible(true);
+        }
+    }//GEN-LAST:event_btnEfetuarVendaActionPerformed
 
     /**
      * @param args the command line arguments

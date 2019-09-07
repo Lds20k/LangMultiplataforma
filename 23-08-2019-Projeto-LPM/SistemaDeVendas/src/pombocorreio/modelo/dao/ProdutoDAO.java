@@ -87,14 +87,20 @@ public class ProdutoDAO {
         boolean alterou = false;
         try{
             con = new Conexao().getConnection();
-            String sql = "UPDATE Produto WHERE COD_Produto = ?";
+            String sql = "UPDATE Produto SET Unidade = ?, Unidade_Tp = ?, Preco = ?, Descricao = ? WHERE COD_Produto = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, produto.getCodigo());
+            stmt.setString(1, produto.getUnidade());
+            stmt.setString(2, produto.getUnidadeTipo());
+            stmt.setFloat(3, produto.getPreco());
+            stmt.setString(4, produto.getDescricao());
+            stmt.setInt(5, produto.getCodigo());
             stmt.execute();
+            alterou = true;
         }
         catch(ClassNotFoundException | SQLException ex){
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return alterou;
     }
+    
 }

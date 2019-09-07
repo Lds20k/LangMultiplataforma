@@ -67,7 +67,7 @@ public class ControleProduto {
            produto.setUnidade(unidade);
            produto.setUnidadeTipo(unidadeTipo);
            produto.setPreco(preco);
-           produtoDAO.alterar();
+           retorno = produtoDAO.alterar(produto);
         }catch(SQLException ex){
             Logger.getLogger(ControleCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
