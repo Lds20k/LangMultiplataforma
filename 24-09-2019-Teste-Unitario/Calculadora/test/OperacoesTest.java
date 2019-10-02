@@ -23,7 +23,7 @@ public class OperacoesTest {
     
     @Test
     public void testeSoma(){
-        a = 2; b = a;
+        a = 2; b = 1;
         assertEquals(3, new Calculadora().soma(a, b));
     }
     
@@ -45,6 +45,12 @@ public class OperacoesTest {
     @Test
     public void testeIsNegative(){
         assertTrue(new Calculadora().isNegative(-2));
+    }
+    
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void testeDivPorZero() {
+        new Calculadora().div(1, 0);
     }
     
     @After
